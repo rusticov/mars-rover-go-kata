@@ -17,6 +17,8 @@ func (d Direction) rotateRight() Direction {
 		return East
 	case East:
 		return South
+	case South:
+		return West
 	default:
 		return North
 	}
