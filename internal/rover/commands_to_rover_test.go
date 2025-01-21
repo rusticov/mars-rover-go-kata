@@ -7,23 +7,24 @@ import (
 
 func TestMovingRover(t *testing.T) {
 
-	t.Run("should face north at origin when not moved", func(t *testing.T) {
-		movingRover := rover.New()
+	testCases := []struct {
+		name           string
+		commands       string
+		expectedOutput string
+	}{
+		{name: "should face north at origin when not moved", commands: "", expectedOutput: "0:0:N"},
+		{name: "should face east at origin when rotating right once", commands: "R", expectedOutput: "0:0:E"},
+	}
 
-		location := movingRover.ExecuteCommands("")
+	for _, testCase := range testCases {
+		t.Run(testCase.name, func(t *testing.T) {
+			movingRover := rover.New()
 
-		if location != "0:0:N" {
-			t.Errorf("expected 0:0:N but got %s", location)
-		}
-	})
+			output := movingRover.ExecuteCommands(testCase.commands)
 
-	t.Run("should face east at origin when rotating right", func(t *testing.T) {
-		movingRover := rover.New()
-
-		location := movingRover.ExecuteCommands("R")
-
-		if location != "0:0:E" {
-			t.Errorf("expected 0:0:E but got %s", location)
-		}
-	})
+			if output != testCase.expectedOutput {
+				t.Errorf("expected %s but got %s", testCase.expectedOutput, output)
+			}
+		})
+	}
 }
