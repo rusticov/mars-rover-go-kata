@@ -24,6 +24,10 @@ func (r *Rover) ExecuteCommands(commands string) string {
 				y = (y + 1) % gridSize
 			case South:
 				y = (y - 1 + gridSize) % gridSize
+			case East:
+				x = (x + 1) % gridSize
+			case West:
+				x = (x - 1 + gridSize) % gridSize
 			}
 		}
 	}
