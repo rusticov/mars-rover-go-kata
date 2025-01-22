@@ -18,7 +18,12 @@ func (r *Rover) ExecuteCommands(commands string) string {
 		case 'R':
 			facing = facing.rotateRight()
 		case 'M':
-			y = (y + 1) % gridSize
+			switch facing {
+			case North:
+				y = (y + 1) % gridSize
+			case South:
+				y = (y - 1 + gridSize) % gridSize
+			}
 		}
 	}
 
