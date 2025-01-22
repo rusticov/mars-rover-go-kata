@@ -6,8 +6,6 @@ type Rover struct {
 }
 
 func (r *Rover) ExecuteCommands(commands string) string {
-	gridSize := 10
-
 	x := 0
 	y := 0
 	facing := North
@@ -19,20 +17,27 @@ func (r *Rover) ExecuteCommands(commands string) string {
 		case 'R':
 			facing = facing.rotateRight()
 		case 'M':
-			switch facing {
-			case North:
-				y = (y + 1) % gridSize
-			case South:
-				y = (y - 1 + gridSize) % gridSize
-			case East:
-				x = (x + 1) % gridSize
-			case West:
-				x = (x - 1 + gridSize) % gridSize
-			}
+			x, y = r.moveForwards(facing, x, y)
 		}
 	}
 
 	return fmt.Sprintf("%d:%d:%c", x, y, facing)
+}
+
+func (r *Rover) moveForwards(facing direction, x, y int) (int, int) {
+	gridSize := 10
+
+	switch facing {
+	case North:
+		y = (y + 1) % gridSize
+	case South:
+		y = (y - 1 + gridSize) % gridSize
+	case East:
+		x = (x + 1) % gridSize
+	case West:
+		x = (x - 1 + gridSize) % gridSize
+	}
+	return x, y
 }
 
 func New() *Rover {
