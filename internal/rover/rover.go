@@ -2,41 +2,6 @@ package rover
 
 import "fmt"
 
-type Direction rune
-
-const (
-	North Direction = 'N'
-	East  Direction = 'E'
-	South Direction = 'S'
-	West  Direction = 'W'
-)
-
-func (d Direction) rotateRight() Direction {
-	switch d {
-	case North:
-		return East
-	case East:
-		return South
-	case South:
-		return West
-	default:
-		return North
-	}
-}
-
-func (d Direction) rotateLeft() Direction {
-	switch d {
-	case North:
-		return West
-	case West:
-		return South
-	case South:
-		return East
-	default:
-		return North
-	}
-}
-
 type Rover struct {
 }
 
