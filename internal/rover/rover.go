@@ -6,6 +6,8 @@ type Rover struct {
 }
 
 func (r *Rover) ExecuteCommands(commands string) string {
+	gridSize := 10
+
 	y := 0
 	facing := North
 
@@ -15,6 +17,8 @@ func (r *Rover) ExecuteCommands(commands string) string {
 			facing = facing.rotateLeft()
 		case 'R':
 			facing = facing.rotateRight()
+		case 'M':
+			y = (y + 1) % gridSize
 		}
 	}
 

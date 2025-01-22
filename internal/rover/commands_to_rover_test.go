@@ -21,6 +21,9 @@ func TestMovingRover(t *testing.T) {
 		{name: "should face south at origin after rotating left twice", commands: "LL", expectedOutput: "0:0:S"},
 		{name: "should face east at origin after rotating left 3 times", commands: "LLL", expectedOutput: "0:0:E"},
 		{name: "should face north at origin after rotating left 4 times", commands: "LLLL", expectedOutput: "0:0:N"},
+		{name: "move north 1 time", commands: "M", expectedOutput: "0:1:N"},
+		{name: "move north to top of the grid", commands: "MMMMMMMMM", expectedOutput: "0:9:N"},
+		{name: "move north 10 times wraps location back to the start", commands: "MMMMMMMMMM", expectedOutput: "0:0:N"},
 	}
 
 	for _, testCase := range testCases {
