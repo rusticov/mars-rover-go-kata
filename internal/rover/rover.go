@@ -8,6 +8,7 @@ type Rover struct {
 func (r *Rover) ExecuteCommands(commands string) string {
 	gridSize := 10
 
+	x := 0
 	y := 0
 	facing := North
 
@@ -27,7 +28,7 @@ func (r *Rover) ExecuteCommands(commands string) string {
 		}
 	}
 
-	return fmt.Sprintf("0:%d:%c", y, facing)
+	return fmt.Sprintf("%d:%d:%c", x, y, facing)
 }
 
 func New() *Rover {
