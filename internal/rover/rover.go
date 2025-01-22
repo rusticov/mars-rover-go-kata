@@ -7,18 +7,18 @@ type Rover struct {
 
 func (r *Rover) ExecuteCommands(commands string) string {
 	y := 0
-	direction := North
+	facing := North
 
 	for _, command := range commands {
 		switch command {
 		case 'L':
-			direction = direction.rotateLeft()
+			facing = facing.rotateLeft()
 		case 'R':
-			direction = direction.rotateRight()
+			facing = facing.rotateRight()
 		}
 	}
 
-	return fmt.Sprintf("0:%d:%c", y, direction)
+	return fmt.Sprintf("0:%d:%c", y, facing)
 }
 
 func New() *Rover {
