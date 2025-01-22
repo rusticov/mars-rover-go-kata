@@ -17,6 +17,10 @@ func TestMovingRover(t *testing.T) {
 		{name: "should face east at origin after rotating right twice", commands: "RR", expectedOutput: "0:0:S"},
 		{name: "should face west at origin after rotating right 3 times", commands: "RRR", expectedOutput: "0:0:W"},
 		{name: "should face back to north at origin after rotating right 4 times", commands: "RRRR", expectedOutput: "0:0:N"},
+		{name: "should face west at origin after rotating left once", commands: "L", expectedOutput: "0:0:W"},
+		{name: "should face south at origin after rotating left twice", commands: "LL", expectedOutput: "0:0:S"},
+		{name: "should face east at origin after rotating left 3 times", commands: "LLL", expectedOutput: "0:0:E"},
+		{name: "should face north at origin after rotating left 4 times", commands: "LLLL", expectedOutput: "0:0:N"},
 	}
 
 	for _, testCase := range testCases {

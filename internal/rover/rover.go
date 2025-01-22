@@ -24,6 +24,19 @@ func (d Direction) rotateRight() Direction {
 	}
 }
 
+func (d Direction) rotateLeft() Direction {
+	switch d {
+	case North:
+		return West
+	case West:
+		return South
+	case South:
+		return East
+	default:
+		return North
+	}
+}
+
 type Rover struct {
 }
 
@@ -32,6 +45,8 @@ func (r *Rover) ExecuteCommands(commands string) string {
 
 	for _, command := range commands {
 		switch command {
+		case 'L':
+			direction = direction.rotateLeft()
 		case 'R':
 			direction = direction.rotateRight()
 		}
