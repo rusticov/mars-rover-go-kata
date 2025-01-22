@@ -23,7 +23,7 @@ func TestMovingRover(t *testing.T) {
 		{name: "should face north at origin after rotating left 4 times", commands: "LLLL", expectedOutput: "0:0:N"},
 		{name: "move north 1 time", commands: "M", expectedOutput: "0:1:N"},
 		{name: "move north to top of the grid", commands: "MMMMMMMMM", expectedOutput: "0:9:N"},
-		{name: "move north 10 times wraps location back to the start", commands: "MMMMMMMMMM", expectedOutput: "0:0:N"},
+		{name: "acceptance test from readme - move north 10 times wraps location back to the start", commands: "MMMMMMMMMM", expectedOutput: "0:0:N"},
 		{name: "move south moves down the grid", commands: "MMMLLM", expectedOutput: "0:2:S"},
 		{name: "move south at bottom wraps location back to the top", commands: "LLM", expectedOutput: "0:9:S"},
 		{name: "move east 1 time", commands: "RM", expectedOutput: "1:0:E"},
@@ -31,6 +31,7 @@ func TestMovingRover(t *testing.T) {
 		{name: "move east 10 times wraps location back to the start", commands: "RMMMMMMMMMM", expectedOutput: "0:0:E"},
 		{name: "move west 1 time from middle of easterly direction", commands: "RMMMRRM", expectedOutput: "2:0:W"},
 		{name: "move west at far west wraps location back to the far east", commands: "LM", expectedOutput: "9:0:W"},
+		{name: "acceptance test from readme - grid with no obstacles, input MMRMMLM", commands: "MMRMMLM", expectedOutput: "2:3:N"},
 	}
 
 	for _, testCase := range testCases {
