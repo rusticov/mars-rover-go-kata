@@ -23,7 +23,13 @@ func (r *Rover) ExecuteCommands(commands string) string {
 			}
 		}
 	}
+
+	return r.displayResult(facing, moveResult)
+}
+
+func (r *Rover) displayResult(facing direction, moveResult MoveResult) string {
 	x, y := r.grid.Location()
+
 	var hitObstaclePrefix string
 	if moveResult == HitObstacle {
 		hitObstaclePrefix = "O:"
