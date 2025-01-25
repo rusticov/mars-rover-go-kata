@@ -40,6 +40,6 @@ func (r *Rover) moveForwards(facing direction, x, y int) (int, int) {
 	return x, y
 }
 
-func New() *Rover {
+func New(_ Grid) *Rover {
 	return &Rover{}
 }
