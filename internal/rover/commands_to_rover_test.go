@@ -36,7 +36,7 @@ func TestMovingRover(t *testing.T) {
 
 	for _, testCase := range testCases {
 		t.Run(testCase.name, func(t *testing.T) {
-			movingRover := rover.New(rover.NewGrid())
+			movingRover := rover.New(rover.NewSquareGrid())
 
 			output := movingRover.ExecuteCommands(testCase.commands)
 
@@ -48,7 +48,7 @@ func TestMovingRover(t *testing.T) {
 
 	// TODO: the test I want to implement next for the Rover, but first I need to be able add obstacles
 	//t.Run("rover should stop when hitting obstacle", func(t *testing.T) {
-	//	grid := rover.NewGrid()
+	//	grid := rover.NewSquareGrid()
 	//  grid.AddObstacleAt(0, 3)
 	//
 	//	movingRover := rover.New(grid)

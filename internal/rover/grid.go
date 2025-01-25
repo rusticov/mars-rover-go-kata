@@ -1,18 +1,23 @@
 package rover
 
-type Grid struct {
+type Grid interface {
+	Location() (x int, y int)
+	MoveForwards(facing direction)
+}
+
+type SquareGrid struct {
 	x    int
 	y    int
 	size int
 }
 
-func (g *Grid) Location() (x int, y int) {
+func (g *SquareGrid) Location() (x int, y int) {
 	x = g.x
 	y = g.y
 	return
 }
 
-func (g *Grid) MoveForwards(facing direction) {
+func (g *SquareGrid) MoveForwards(facing direction) {
 	switch facing {
 	case North:
 		g.y = (g.y + 1) % g.size
@@ -25,8 +30,8 @@ func (g *Grid) MoveForwards(facing direction) {
 	}
 }
 
-func NewGrid() *Grid {
-	return &Grid{
+func NewSquareGrid() *SquareGrid {
+	return &SquareGrid{
 		size: 10,
 	}
 }

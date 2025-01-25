@@ -3,7 +3,7 @@ package rover
 import "fmt"
 
 type Rover struct {
-	grid *Grid
+	grid Grid
 }
 
 func (r *Rover) ExecuteCommands(commands string) string {
@@ -24,6 +24,6 @@ func (r *Rover) ExecuteCommands(commands string) string {
 	return fmt.Sprintf("%d:%d:%c", x, y, facing)
 }
 
-func New(grid *Grid) *Rover {
+func New(grid Grid) *Rover {
 	return &Rover{grid: grid}
 }
