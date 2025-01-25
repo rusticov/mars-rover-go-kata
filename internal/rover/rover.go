@@ -3,28 +3,28 @@ package rover
 import "fmt"
 
 type Rover struct {
-	grid Grid
+	grid   Grid
+	facing direction
 }
 
 func (r *Rover) ExecuteCommands(commands string) string {
-	facing := North
 	var moveResult MoveResult
 
 	for _, command := range commands {
 		switch command {
 		case 'L':
-			facing = facing.rotateLeft()
+			r.facing = r.facing.rotateLeft()
 		case 'R':
-			facing = facing.rotateRight()
+			r.facing = r.facing.rotateRight()
 		case 'M':
-			moveResult = r.grid.MoveForwards(facing)
+			moveResult = r.grid.MoveForwards(r.facing)
 			if moveResult != MoveOk {
 				break
 			}
 		}
 	}
 
-	return r.displayResult(facing, moveResult)
+	return r.displayResult(r.facing, moveResult)
 }
 
 func (r *Rover) displayResult(facing direction, moveResult MoveResult) string {
@@ -39,5 +39,8 @@ func (r *Rover) displayResult(facing direction, moveResult MoveResult) string {
 }
 
 func New(grid Grid) *Rover {
-	return &Rover{grid: grid}
+	return &Rover{
+		grid:   grid,
+		facing: North,
+	}
 }
