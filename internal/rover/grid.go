@@ -5,8 +5,15 @@ type Grid interface {
 	Location() (x int, y int)
 
 	// MoveForwards moves Rover in the given direction and returns true if succeeds.
-	MoveForwards(facing direction) bool
+	MoveForwards(facing direction) MoveResult
 }
+
+type MoveResult bool
+
+const (
+	MoveOk      MoveResult = false
+	HitObstacle MoveResult = true
+)
 
 type SquareGrid struct {
 	x         int
@@ -26,7 +33,7 @@ func (g *SquareGrid) Location() (x int, y int) {
 	return
 }
 
-func (g *SquareGrid) MoveForwards(facing direction) bool {
+func (g *SquareGrid) MoveForwards(facing direction) MoveResult {
 	x := g.x
 	y := g.y
 	switch facing {
@@ -42,12 +49,12 @@ func (g *SquareGrid) MoveForwards(facing direction) bool {
 
 	hitObstacle := g.obstacles[location{x, y}]
 	if hitObstacle {
-		return false
+		return HitObstacle
 	}
 
 	g.x = x
 	g.y = y
-	return true
+	return MoveOk
 }
 
 func (g *SquareGrid) AddObstacleAt(x int, y int) {
