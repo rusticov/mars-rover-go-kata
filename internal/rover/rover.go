@@ -8,8 +8,12 @@ type Rover struct {
 }
 
 func (r *Rover) ExecuteCommands(commands string) string {
-	var moveResult MoveResult
+	moveResult := r.executeCommands(commands)
 
+	return r.displayResult(r.facing, moveResult)
+}
+
+func (r *Rover) executeCommands(commands string) MoveResult {
 	for _, command := range commands {
 		switch command {
 		case 'L':
@@ -17,14 +21,13 @@ func (r *Rover) ExecuteCommands(commands string) string {
 		case 'R':
 			r.facing = r.facing.rotateRight()
 		case 'M':
-			moveResult = r.grid.MoveForwards(r.facing)
-			if moveResult != MoveOk {
-				break
+			result := r.grid.MoveForwards(r.facing)
+			if result != MoveOk {
+				return result
 			}
 		}
 	}
-
-	return r.displayResult(r.facing, moveResult)
+	return MoveOk
 }
 
 func (r *Rover) displayResult(facing direction, moveResult MoveResult) string {
