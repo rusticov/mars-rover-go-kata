@@ -59,4 +59,18 @@ func TestMovingRover(t *testing.T) {
 			t.Errorf("expected %s but got %s", expectedOutput, output)
 		}
 	})
+
+	t.Run("rover should not rotate after hitting obstacle", func(t *testing.T) {
+		grid := rover.NewSquareGrid()
+		grid.AddObstacleAt(1, 2)
+
+		movingRover := rover.New(grid)
+
+		output := movingRover.ExecuteCommands("RMLMML")
+
+		expectedOutput := "O:1:1:N"
+		if output != expectedOutput {
+			t.Errorf("expected %s but got %s", expectedOutput, output)
+		}
+	})
 }
