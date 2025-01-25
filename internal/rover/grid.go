@@ -12,20 +12,18 @@ func (g *Grid) Location() (x int, y int) {
 	return
 }
 
-func (g *Grid) moveForwards(facing direction, x, y int) (int, int) {
+func (g *Grid) MoveForwards(facing direction) (int, int) {
 	switch facing {
 	case North:
-		y = (y + 1) % g.size
+		g.y = (g.y + 1) % g.size
 	case South:
-		y = (y - 1 + g.size) % g.size
+		g.y = (g.y - 1 + g.size) % g.size
 	case East:
-		x = (x + 1) % g.size
+		g.x = (g.x + 1) % g.size
 	case West:
-		x = (x - 1 + g.size) % g.size
+		g.x = (g.x - 1 + g.size) % g.size
 	}
-	g.x = x
-	g.y = y
-	return x, y
+	return g.x, g.y
 }
 
 func NewGrid() *Grid {

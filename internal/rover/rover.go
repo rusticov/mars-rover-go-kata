@@ -18,7 +18,7 @@ func (r *Rover) ExecuteCommands(commands string) string {
 		case 'R':
 			facing = facing.rotateRight()
 		case 'M':
-			x, y = r.grid.moveForwards(facing, x, y)
+			x, y = r.grid.MoveForwards(facing)
 		}
 	}
 	x, y = r.grid.Location()
