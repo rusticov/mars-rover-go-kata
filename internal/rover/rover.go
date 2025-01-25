@@ -7,8 +7,6 @@ type Rover struct {
 }
 
 func (r *Rover) ExecuteCommands(commands string) string {
-	x := 0
-	y := 0
 	facing := North
 
 	for _, command := range commands {
@@ -18,10 +16,10 @@ func (r *Rover) ExecuteCommands(commands string) string {
 		case 'R':
 			facing = facing.rotateRight()
 		case 'M':
-			x, y = r.grid.MoveForwards(facing)
+			r.grid.MoveForwards(facing)
 		}
 	}
-	x, y = r.grid.Location()
+	x, y := r.grid.Location()
 
 	return fmt.Sprintf("%d:%d:%c", x, y, facing)
 }
