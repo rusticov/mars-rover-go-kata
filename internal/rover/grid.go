@@ -6,6 +6,12 @@ type Grid struct {
 	size int
 }
 
+func (g *Grid) Location() (x int, y int) {
+	x = g.x
+	y = g.y
+	return
+}
+
 func (g *Grid) moveForwards(facing direction, x, y int) (int, int) {
 	switch facing {
 	case North:
@@ -17,6 +23,8 @@ func (g *Grid) moveForwards(facing direction, x, y int) (int, int) {
 	case West:
 		x = (x - 1 + g.size) % g.size
 	}
+	g.x = x
+	g.y = y
 	return x, y
 }
 

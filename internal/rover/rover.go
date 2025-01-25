@@ -21,6 +21,7 @@ func (r *Rover) ExecuteCommands(commands string) string {
 			x, y = r.grid.moveForwards(facing, x, y)
 		}
 	}
+	x, y = r.grid.Location()
 
 	return fmt.Sprintf("%d:%d:%c", x, y, facing)
 }
