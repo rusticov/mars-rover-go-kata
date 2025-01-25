@@ -10,7 +10,7 @@ type Rover struct {
 func (r *Rover) ExecuteCommands(commands string) string {
 	moveResult := r.executeCommands(commands)
 
-	return r.displayResult(r.facing, moveResult)
+	return r.displayResult(moveResult)
 }
 
 func (r *Rover) executeCommands(commands string) MoveResult {
@@ -30,7 +30,7 @@ func (r *Rover) executeCommands(commands string) MoveResult {
 	return MoveOk
 }
 
-func (r *Rover) displayResult(facing direction, moveResult MoveResult) string {
+func (r *Rover) displayResult(moveResult MoveResult) string {
 	x, y := r.grid.Location()
 
 	var hitObstaclePrefix string
@@ -38,7 +38,7 @@ func (r *Rover) displayResult(facing direction, moveResult MoveResult) string {
 		hitObstaclePrefix = "O:"
 	}
 
-	return fmt.Sprintf("%s%d:%d:%c", hitObstaclePrefix, x, y, facing)
+	return fmt.Sprintf("%s%d:%d:%c", hitObstaclePrefix, x, y, r.facing)
 }
 
 func New(grid Grid) *Rover {
