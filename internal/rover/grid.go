@@ -15,6 +15,13 @@ const (
 	HitObstacle MoveResult = true
 )
 
+func NewSquareGrid() *SquareGrid {
+	return &SquareGrid{
+		size:      10,
+		obstacles: make(map[location]bool),
+	}
+}
+
 type SquareGrid struct {
 	x         int
 	y         int
@@ -59,11 +66,4 @@ func (g *SquareGrid) MoveForwards(facing direction) MoveResult {
 
 func (g *SquareGrid) AddObstacleAt(x int, y int) {
 	g.obstacles[location{x, y}] = true
-}
-
-func NewSquareGrid() *SquareGrid {
-	return &SquareGrid{
-		size:      10,
-		obstacles: make(map[location]bool),
-	}
 }
