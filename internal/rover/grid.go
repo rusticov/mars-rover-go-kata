@@ -1,14 +1,23 @@
 package rover
 
 type Grid interface {
+	// Location is the final Rover location.
 	Location() (x int, y int)
-	MoveForwards(facing direction)
+
+	// MoveForwards moves Rover in the given direction and returns true if succeeds.
+	MoveForwards(facing direction) bool
 }
 
 type SquareGrid struct {
-	x    int
-	y    int
-	size int
+	x         int
+	y         int
+	size      int
+	obstacles map[location]bool
+}
+
+type location struct {
+	x int
+	y int
 }
 
 func (g *SquareGrid) Location() (x int, y int) {
@@ -17,21 +26,37 @@ func (g *SquareGrid) Location() (x int, y int) {
 	return
 }
 
-func (g *SquareGrid) MoveForwards(facing direction) {
+func (g *SquareGrid) MoveForwards(facing direction) bool {
+	x := g.x
+	y := g.y
 	switch facing {
 	case North:
-		g.y = (g.y + 1) % g.size
+		y = (y + 1) % g.size
 	case South:
-		g.y = (g.y - 1 + g.size) % g.size
+		y = (y - 1 + g.size) % g.size
 	case East:
-		g.x = (g.x + 1) % g.size
+		x = (x + 1) % g.size
 	case West:
-		g.x = (g.x - 1 + g.size) % g.size
+		x = (x - 1 + g.size) % g.size
 	}
+
+	hitObstacle := g.obstacles[location{x, y}]
+	if hitObstacle {
+		return false
+	}
+
+	g.x = x
+	g.y = y
+	return true
+}
+
+func (g *SquareGrid) AddObstacleAt(x int, y int) {
+	g.obstacles[location{x, y}] = true
 }
 
 func NewSquareGrid() *SquareGrid {
 	return &SquareGrid{
-		size: 10,
+		size:      10,
+		obstacles: make(map[location]bool),
 	}
 }

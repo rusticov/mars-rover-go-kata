@@ -46,18 +46,17 @@ func TestMovingRover(t *testing.T) {
 		})
 	}
 
-	// TODO: the test I want to implement next for the Rover, but first I need to be able add obstacles
-	//t.Run("rover should stop when hitting obstacle", func(t *testing.T) {
-	//	grid := rover.NewSquareGrid()
-	//  grid.AddObstacleAt(0, 3)
-	//
-	//	movingRover := rover.New(grid)
-	//
-	//	output := movingRover.ExecuteCommands("MMMM")
-	//
-	//	expectedOutput := "O:0:2:N"
-	//	if output != expectedOutput {
-	//		t.Errorf("expected %s but got %s", expectedOutput, output)
-	//	}
-	//})
+	t.Run("rover should stop when hitting obstacle", func(t *testing.T) {
+		grid := rover.NewSquareGrid()
+		grid.AddObstacleAt(0, 3)
+
+		movingRover := rover.New(grid)
+
+		output := movingRover.ExecuteCommands("MMMM")
+
+		expectedOutput := "O:0:2:N"
+		if output != expectedOutput {
+			t.Errorf("expected %s but got %s", expectedOutput, output)
+		}
+	})
 }
