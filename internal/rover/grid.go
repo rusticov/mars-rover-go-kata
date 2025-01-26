@@ -41,6 +41,19 @@ func (g *SquareGrid) Location() (x int, y int) {
 }
 
 func (g *SquareGrid) MoveForwards(facing direction) MoveResult {
+	endLocation := g.requestedMovement(facing)
+
+	hitObstacle := g.obstacles[endLocation]
+	if hitObstacle {
+		return HitObstacle
+	}
+
+	g.x = endLocation.x
+	g.y = endLocation.y
+	return MoveOk
+}
+
+func (g *SquareGrid) requestedMovement(facing direction) location {
 	x := g.x
 	y := g.y
 	switch facing {
@@ -54,14 +67,7 @@ func (g *SquareGrid) MoveForwards(facing direction) MoveResult {
 		x = (x - 1 + g.size) % g.size
 	}
 
-	hitObstacle := g.obstacles[location{x, y}]
-	if hitObstacle {
-		return HitObstacle
-	}
-
-	g.x = x
-	g.y = y
-	return MoveOk
+	return location{x: x, y: y}
 }
 
 func (g *SquareGrid) AddObstacleAt(x int, y int) {
