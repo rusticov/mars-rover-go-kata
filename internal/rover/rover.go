@@ -31,14 +31,19 @@ func (r *Rover) executeCommands(commands string) MoveResult {
 }
 
 func (r *Rover) displayResult(moveResult MoveResult) string {
-	x, y := r.grid.Location()
+	location := r.grid.Location()
 
 	var hitObstaclePrefix string
 	if moveResult == HitObstacle {
 		hitObstaclePrefix = "O:"
 	}
 
-	return fmt.Sprintf("%s%d:%d:%c", hitObstaclePrefix, x, y, r.facing)
+	return fmt.Sprintf("%s%d:%d:%c",
+		hitObstaclePrefix,
+		location.x,
+		location.y,
+		r.facing,
+	)
 }
 
 func New(grid Grid) *Rover {
