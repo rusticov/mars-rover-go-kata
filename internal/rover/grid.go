@@ -23,8 +23,7 @@ func NewSquareGrid() *SquareGrid {
 }
 
 type SquareGrid struct {
-	x         int
-	y         int
+	location  location
 	size      int
 	obstacles map[location]bool
 }
@@ -35,8 +34,8 @@ type location struct {
 }
 
 func (g *SquareGrid) Location() (x int, y int) {
-	x = g.x
-	y = g.y
+	x = g.location.x
+	y = g.location.y
 	return
 }
 
@@ -48,14 +47,13 @@ func (g *SquareGrid) MoveForwards(facing direction) MoveResult {
 		return HitObstacle
 	}
 
-	g.x = endLocation.x
-	g.y = endLocation.y
+	g.location = endLocation
 	return MoveOk
 }
 
 func (g *SquareGrid) requestedMovement(facing direction) location {
-	x := g.x
-	y := g.y
+	x := g.location.x
+	y := g.location.y
 	switch facing {
 	case North:
 		y = (y + 1) % g.size
